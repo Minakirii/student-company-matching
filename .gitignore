@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .vite
+
+# AI skill config & docs (keep local only)
+.trae
+*.pdf
