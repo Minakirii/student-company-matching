@@ -1,0 +1,29 @@
+{
+  "landmarks": [
+    { "id": "lm_kejiyuan", "name": "科技园", "type": "tech_park", "lat": 22.540, "lng": 113.955, "nearestStation": "s_hi_tech_park" },
+    { "id": "lm_ruanjianyuan", "name": "软件园", "type": "tech_park", "lat": 22.538, "lng": 113.950, "nearestStation": "s_shenzhen_university" },
+    { "id": "lm_shenzhen_univ", "name": "深圳大学（粤海校区）", "type": "university", "lat": 22.535, "lng": 113.945, "nearestStation": "s_shenzhen_university" },
+    { "id": "lm_shenzhen_univ_lake", "name": "深圳大学（丽湖校区）", "type": "university", "lat": 22.592, "lng": 113.968, "nearestStation": "s_shenzhen_univ_lake" },
+    { "id": "lm_tsinghua_sz", "name": "清华大学深圳国际研究生院", "type": "university", "lat": 22.590, "lng": 113.975, "nearestStation": "s_university_town" },
+    { "id": "lm_pku_sz", "name": "北京大学深圳研究生院", "type": "university", "lat": 22.589, "lng": 113.974, "nearestStation": "s_university_town" },
+    { "id": "lm_hit_sz", "name": "哈工大（深圳）", "type": "university", "lat": 22.590, "lng": 113.976, "nearestStation": "s_university_town" },
+    { "id": "lm_sustech", "name": "南方科技大学", "type": "university", "lat": 22.593, "lng": 113.995, "nearestStation": "s_tanglang_5" },
+    { "id": "lm_szu_sz", "name": "深圳职业技术大学", "type": "university", "lat": 22.592, "lng": 113.943, "nearestStation": "s_liuxiandong" },
+    { "id": "lm_tencent_binhai", "name": "腾讯滨海大厦", "type": "tech_park", "lat": 22.522, "lng": 113.937, "nearestStation": "s_keyuan" },
+    { "id": "lm_tencent_bantian", "name": "腾讯总部（企鹅岛）", "type": "tech_park", "lat": 22.505, "lng": 113.863, "nearestStation": "s_bao'an_center" },
+    { "id": "lm_huawei", "name": "华为坂田基地", "type": "tech_park", "lat": 22.637, "lng": 114.065, "nearestStation": "s_huawei" },
+    { "id": "lm_dji", "name": "大疆创新总部", "type": "tech_park", "lat": 22.540, "lng": 113.958, "nearestStation": "s_hi_tech_park" },
+    { "id": "lm_zhongxing", "name": "中兴通讯总部", "type": "tech_park", "lat": 22.540, "lng": 113.959, "nearestStation": "s_hi_tech_park" },
+    { "id": "lm_byd", "name": "比亚迪总部", "type": "tech_park", "lat": 22.685, "lng": 114.330, "nearestStation": "s_pingshan_center" },
+    { "id": "lm_futian_cbd", "name": "福田CBD", "type": "business_center", "lat": 22.539, "lng": 114.061, "nearestStation": "s_shopping_park" },
+    { "id": "lm_nanshan_cbd", "name": "南山中心区", "type": "business_center", "lat": 22.521, "lng": 113.938, "nearestStation": "s_houhai" },
+    { "id": "lm_lo Wu_commercial", "name": "罗湖商业区", "type": "business_center", "lat": 22.545, "lng": 114.118, "nearestStation": "s_laojie" },
+    { "id": "lm_qianhai", "name": "前海自贸区", "type": "business_center", "lat": 22.510, "lng": 113.890, "nearestStation": "s_qianwan" },
+    { "id": "lm_shekou", "name": "蛇口网谷", "type": "tech_park", "lat": 22.486, "lng": 113.915, "nearestStation": "s_sea_world" },
+    { "id": "lm_chegongmiao", "name": "车公庙天安数码城", "type": "tech_park", "lat": 22.537, "lng": 114.031, "nearestStation": "s_chegongmiao" },
+    { "id": "lm_meilin", "name": "梅林卓悦汇", "type": "business_center", "lat": 22.567, "lng": 114.065, "nearestStation": "s_shangmeilin" },
+    { "id": "lm_lo Wu_railway", "name": "罗湖火车站/罗湖口岸", "type": "business_center", "lat": 22.534, "lng": 114.119, "nearestStation": "s_laojie" },
+    { "id": "lm_huaqiangbei_market", "name": "华强北电子市场", "type": "business_center", "lat": 22.542, "lng": 114.088, "nearestStation": "s_huaqiang_rd" },
+    { "id": "lm_bantian_tech", "name": "坂田天安云谷", "type": "tech_park", "lat": 22.650, "lng": 114.065, "nearestStation": "s_gangtou" }
+  ]
+}
