@@ -23,14 +23,18 @@ export default function Configure() {
   const [selectedPlaces, setSelectedPlaces] = useState<Record<string, PlaceOption | null>>({})
   const [expandedMembers, setExpandedMembers] = useState<Record<string, boolean>>({})
   const abortControllersRef = useRef<Record<string, AbortController>>({})
+  const searchTimersRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({})
+  const requestSeqRef = useRef<Record<string, number>>({})
 
   useEffect(() => {
     if (members.length < 2) {
       addMember()
     }
     const controllers = abortControllersRef.current
+    const timers = searchTimersRef.current
     return () => {
       Object.values(controllers).forEach(ctrl => ctrl.abort())
+      Object.values(timers).forEach(timer => clearTimeout(timer))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -39,35 +43,48 @@ export default function Configure() {
     setExpandedMembers(prev => ({ ...prev, [memberId]: !prev[memberId] }))
   }, [])
 
+  const cancelSearchTask = useCallback((memberId: string) => {
+    const timer = searchTimersRef.current[memberId]
+    if (timer) clearTimeout(timer)
+    delete searchTimersRef.current[memberId]
+
+    abortControllersRef.current[memberId]?.abort()
+    delete abortControllersRef.current[memberId]
+  }, [])
+
   const searchPlace = useCallback((memberId: string, query: string) => {
     setSearchQueries(prev => ({ ...prev, [memberId]: query }))
-    if (query.length < 1) {
+    cancelSearchTask(memberId)
+
+    if (!query.trim()) {
       setSuggestions(prev => ({ ...prev, [memberId]: [] }))
       return
     }
 
-    if (abortControllersRef.current[memberId]) {
-      abortControllersRef.current[memberId].abort()
-    }
-    const controller = new AbortController()
-    abortControllersRef.current[memberId] = controller
+    const requestId = (requestSeqRef.current[memberId] ?? 0) + 1
+    requestSeqRef.current[memberId] = requestId
 
-    const timer = setTimeout(async () => {
+    searchTimersRef.current[memberId] = setTimeout(async () => {
+      const controller = new AbortController()
+      abortControllersRef.current[memberId] = controller
+
       try {
         const res = await fetch(`/api/places/search?q=${encodeURIComponent(query)}`, {
           signal: controller.signal,
         })
         const data = await res.json()
+        if (requestSeqRef.current[memberId] !== requestId) return
         setSuggestions(prev => ({ ...prev, [memberId]: data.places || [] }))
-      } catch {
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return
+        if (requestSeqRef.current[memberId] !== requestId) return
         setSuggestions(prev => ({ ...prev, [memberId]: [] }))
       }
     }, 300)
-
-    return () => clearTimeout(timer)
-  }, [])
+  }, [cancelSearchTask])
 
   const selectPlace = useCallback((memberId: string, place: PlaceOption) => {
+    cancelSearchTask(memberId)
     setSelectedPlaces(prev => ({ ...prev, [memberId]: place }))
     setSearchQueries(prev => ({ ...prev, [memberId]: place.name }))
     setSuggestions(prev => ({ ...prev, [memberId]: [] }))
@@ -77,7 +94,7 @@ export default function Configure() {
       lat: place.lat,
       lng: place.lng,
     })
-  }, [updateMember])
+  }, [updateMember, cancelSearchTask])
 
   const canCompute = useMemo(
     () => members.every(m => m.lat !== 0 && m.lng !== 0) && members.length >= 2,
